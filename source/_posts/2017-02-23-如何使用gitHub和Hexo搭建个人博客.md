@@ -1,7 +1,8 @@
 ---
 title: 如何使用github和Hexo搭建个人博客
 date: 2017-02-23 15:05:13
-tags: [Hexo,web,github]
+tags: [Hexo,Web,github]
+category: Web前端知识
 ---
 
 
