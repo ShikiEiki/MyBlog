@@ -181,13 +181,10 @@ static void onMeasure(
 就像@OnPrepare一样,@OnMeasure方法也能生成阶段间的输出(能够使用@FromMeasure注释的参数来访问),并且可以在后台线程中执行.
 
 ##### ShouldUpdate
-A MountSpec can define a method annotated with @ShouldUpdate to avoid remeasuring and remounting upon updates.
-Invocations of @ShouldUpdate are dependent on whether a Component is a pure render function. A Component is a pure render function if the result of the rendering only depends on its props and states. This means that the Component shouldn’t be accessing any mutable global variable during @OnMount.
-A @MountSpec can be defined as pure render by using the pureRender parameter of the @MountSpec annotation. Only pure render Components can assume that when props do not change remounting won’t be needed. A @ShouldUpdate function can be defined as follows:
 
-一个MountSpec可以使用@ShouldUpdate注释定义一个方法来避免在更新时进行重新测试和重新挂载。
-@ShouldUpdate的调用的前提是component是"纯渲染函数"。一个组件如果是纯渲染函数,那么它的渲染结果只取决于它的prop和状态. 这意味着在@OnMount期间，组件不应该访问任何可变的全局变量。
-一个@MountSpec可以通过使用@MountSpec注释的pureRender参数来定自己为"纯渲染的"。只有纯渲染的Component可以假设当prop不更改时就不需要重新挂载。 @ShouldUpdate函数可以定义如下：
+Mount Spec可以使用@ShouldUpdate注释定义一个方法来避免在更新时进行重新测试和重新挂载。
+@ShouldUpdate的调用的前提是component是"纯渲染函数"。一个组件如果是纯渲染函数,那么它的渲染结果只取决于它的prop和状态.这意味着在@OnMount期间，组件不应该访问任何可变的全局变量。
+一个@MountSpec可以通过使用@MountSpec注释的pureRender参数来定自己为"纯渲染的"。只有纯渲染的Component可以假设当prop不更改时就不需要重新挂载。@ShouldUpdate函数可以定义如下：
 
 ``` java
 @ShouldUpdate(onMount = true)
@@ -196,12 +193,9 @@ public boolean shouldUpdate(Diff<String> someStringProp) {
 }
 ```
 
-The parameters taken from shouldUpdate are Diffs of Props or State. A Diff is an object containing the value of a @Prop or a @State in the old components hierarchy and the value of the same @Prop or @State in the new components hierarchy. In this example this component was defining someStringProp as a String @Prop. shouldUpdate will receive a Diff<String> to be able to compare the old and new value of this @Prop.
-shouldUpdate has to take into consideration any prop and any states that are used at @OnMount time. It can safely ignore props and states that are only used at ‘@OnMount/@OnUnbind` time as these two methods will be executed regardless.
-The onMount attribute on the @ShouldUpdate annotation controls whether this shouldUpdate check can happen at mount time. By default, Litho will try to do this reconciliation at layout time, but if layout diffing is turned off it might be useful to set onMount to true in order to execute this check at mount time instead. The onMount attribute is set to false by default as the equality check might be heavy itself and make mount performances worse.
-@ShouldUpdate annotated methods are currently only supported in @MountSpec. We have plans to expand the support to complex layouts in the future but at the moment a @ShouldUpdate annotated method in a @LayoutSpec would have no effect.
+shouldUpdate中的参数是prop或状态的对比差异。Diff是一个包含旧Component层级结构中@Prop或@State的值以及新Component层级结构中相同的@Prop或@State值的类。在这个示例中，我们将someStringProp定义为一个String类型的@Prop。shouldUpdate方法将收到一个Diff<String>，以便能够比较此@Prop的旧值和新值。
+shouldUpdate必须考虑在@OnMount时使用的任何prop和状态。它可以安全地忽略仅在“@OnMount/@OnUnbind”时间使用的prop和状态，因为这两个方法无论如何都会被执行。
 
-从shouldUpdate获取的参数是道具或状态的差异。 Diff是一个包含旧组件层次结构中@Prop或@State的值的对象，以及新组件层次结构中相同的@Prop或@State的值。在此示例中，此组件将someStringProp定义为String @Prop。 shouldUpdate将收到一个Diff <String>，以便能够比较此@Prop的旧值和新值。
-shouldUpdate必须考虑在@OnMount时间使用的任何prop和任何状态。它可以安全地忽略仅在“@ OnMount / @ OnUnbind”时间使用的道具和状态，因为这两个方法将被执行。
-@ShouldUpdate注释上的onMount属性可以控制是否可以在安装时发生此应更新检查。默认情况下，Litho将尝试在布局时执行此对帐，但是如果布局差异关闭，则将onMount设置为true可能会有用，以便在安装时执行此检查。默认情况下，onMount属性设置为false，因为相等检查本身可能很重，并使安装性能更差。
-@ShouldUpdate注释方法目前仅在@MountSpec中受支持。我们计划在未来扩大对复杂布局的支持，但目前@LayoutSpec中的@ShouldUpdate注释方法将不起作用。
+@ShouldUpdate注释上的onMount属性可以控制是否在挂载时进行shouldUpdate检查。默认情况下，Litho将尝试在layout的时候执行检查，但是在检查布局差异功能被关闭的时候,作为替代方案,将onMount设置为true,在挂载时执行此检查就变得很有用了。默认情况下，onMount属性被设置为false，因为相等检查本身可能很耗时,这会使挂载性能变得更差。
+
+@ShouldUpdate注释方法目前仅支持在@MountSpec中使用。我们计划在未来在更复杂的布局中也支持它，但目前在@LayoutSpec中用@ShouldUpdate注释的方法将不起作用。
