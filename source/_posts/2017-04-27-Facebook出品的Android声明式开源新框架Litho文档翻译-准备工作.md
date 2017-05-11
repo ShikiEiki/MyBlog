@@ -6,14 +6,24 @@ category: Android知识
 ---
 
 欢迎转载,转载请标明出处.
-
-# 快速开始
-
+英文原文文档地址: [Litho-doc](http://fblitho.com/docs/getting-started)
+## 快速开始
 ### 准备工作
 
-#### gradle
+</p>
+</p>
 
-##### 集成Litho至你的工程
+#### 集成Litho至你的工程
+---
+
+</p>
+</p>
+
+##### gradle
+
+</p>
+</p>
+
 你可以通过在你的Gradle的build.gradle文件中添加以下代码来把Litho添加至你的Android工程中.
 ``` gradle
 dependencies {
@@ -38,7 +48,15 @@ dependencies {
   testCompile 'com.facebook.litho:litho-testing:0.2.0'
 }
 ```
-#### Buck
+
+</p>
+</p>
+
+##### Buck
+
+</p>
+</p>
+
 你可以通过在你的Buck的BUCK文件中添加以下代码来把Litho添加至你的Android工程中.
 ``` buck
 android_prebuilt_aar(
@@ -108,10 +126,14 @@ litho_android_library(
 )
 ```
 
-##### 测试集成情况
+</p>
+</p>
+
+#### 测试集成情况
+---
 你可以通过添加一个由Litho创建的view至activity来测试集成情况
 
-首先,初始化SoLoader.Litho依赖SoLoader来加载底层布局引擎所需的本地库.在Application中进行这个操作比较合适.
+首先,初始化SoLoader.Litho依赖[SoLoader](https://github.com/facebook/SoLoader)来加载底层布局引擎[Yoga](https://facebook.github.io/yoga/)所需的本地库.在Application中进行这个操作比较合适.
 
 ``` java
 [MyApplication.java]
@@ -156,4 +178,14 @@ public class MyActivity extends Activity {
 
 现在,当你运行app的时候,你就可以看到"Hello World"显示在屏幕上.
 
+</p>
+</p>
+</p>
+</p>
+
 [回到导航页](https://shikieiki.github.io/2017/05/04/Facebook%E5%87%BA%E5%93%81%E7%9A%84Android%E5%A3%B0%E6%98%8E%E5%BC%8F%E5%BC%80%E6%BA%90%E6%96%B0%E6%A1%86%E6%9E%B6Litho%E6%96%87%E6%A1%A3%E7%BF%BB%E8%AF%91-%E6%80%BB%E8%A7%88%E5%92%8C%E5%AF%BC%E8%88%AA/)
+
+</p>
+</p>
+</p>
+</p>

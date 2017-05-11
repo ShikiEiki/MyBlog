@@ -6,15 +6,22 @@ category: Android知识
 ---
 
 欢迎转载,转载请标明出处.
-
-# 快速开始
-
+英文原文文档地址: [Litho-doc](http://fblitho.com/docs/tutorial)
+## 快速开始
 ### 教程
-本教程已经假定你已经按照入门指南正确设置了Litho.
 
-在本教程中，你将首先使用Litho在屏幕上构建一个基本的"Hello World！"，然后再构建一个"Hello World！" item组成的列表。在这个过程中,你将了解到Litho的构建块：Component和LithoView。你将学习如何设置Component的属性。
+</p>
+</p>
 
-##### 1.Hello World
+本教程已经假定你已经按照[准备工作](https://shikieiki.github.io/2017/04/27/Facebook%E5%87%BA%E5%93%81%E7%9A%84Android%E5%A3%B0%E6%98%8E%E5%BC%8F%E5%BC%80%E6%BA%90%E6%96%B0%E6%A1%86%E6%9E%B6Litho%E6%96%87%E6%A1%A3%E7%BF%BB%E8%AF%91-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/)正确设置了Litho.
+
+在本教程中，你将首先使用Litho在屏幕上构建一个基本的"Hello World！"，然后再构建一个"Hello World！" item组成的列表。在这个过程中,你将了解到Litho的构建块：[Component](http://fblitho.com/javadoc/com/facebook/litho/Component)和[LithoView](http://fblitho.com/javadoc/com/facebook/litho/LithoView)。你将学习如何设置Component的属性。
+
+</p>
+</p>
+
+#### 1.Hello World
+---
 在最初的步骤中,你将显示一个带有"Hello World"的View.
 
 首先,在Application中初始化SoLoader.
@@ -30,11 +37,11 @@ public class SampleApplication extends Application {
 }
 ```
 
-Litho在后台使用Yoga加载布局.Yoga需要依赖本地库,而我们引入SoLoader来处理加载这些本地库的工作.在此处初始化SoLoader确保你稍后不会引用到那些未加载的库.
+Litho在后台使用[Yoga](https://facebook.github.io/yoga/)加载布局.Yoga需要依赖本地库,而我们引入[SoLoader](https://github.com/facebook/SoLoader)来处理加载这些本地库的工作.在此处初始化SoLoader确保你稍后不会引用到那些未加载的库.
 
 另外,如果你想要调试你的Component层级结构,你可以按照其中的步骤安装[Stetho]().
 
-下一步,添加一个Litho中预定义好的Text Component到activity中:
+下一步,添加一个Litho中预定义好的[Text](http://fblitho.com/javadoc/com/facebook/litho/widget/Text) Component到activity中:
 ``` java 
 @Override
 public void onCreate(Bundle savedInstanceState) {
@@ -60,7 +67,7 @@ Text.create(context)
     .build();
 ```
 
-Text是在com.facebook.litho.widget中定义的核心组件.如你所见,它有诸如text和textSize这样的一系列的属性.我们从React中获得灵感,这些属性我们称之为props.
+Text是在com.facebook.litho.widget中定义的核心组件.如你所见,它有诸如text和textSize这样的一系列的属性.我们从[React](https://facebook.github.io/react/)中获得灵感,这些属性我们称之为props.
 
 稍后,你将学习到如何编写自己的component,但是值得注意的是,Text类是由TextSpec类生成的,生成的component类提供了一套API方法来设置props的值.
 
@@ -72,7 +79,11 @@ Text是在com.facebook.litho.widget中定义的核心组件.如你所见,它有�
 
 虽然并不漂亮,但是这已经是一个好的开端了!
 
-##### 2.你的第一个自定义Component
+</p>
+</p>
+
+#### 2.你的第一个自定义Component
+---
 在本教程的末尾,你将会拥有一个可以滚动的列表,这个列表将循环的显示一个包含标题和副标题的item.简直激动人心!
 
 在教程的本部分中,你将编写一个简单的component作为列表的item.当然,现实世界中的app的item会更加复杂,但是你会在这个示例中学到你今后需要所有基础的知识.
@@ -104,7 +115,7 @@ public class ListItemSpec {
 }
 ```
 
-你应该已经认出了之前教程中使用过的Text Component.在这个例子中,你要将其作为一个子属性添加至一个Column中.你可以把Column等同于HTML中的<div>标签.它是一个包装器,用于把组件整合在一起,并且可能会添加一些背景样式.由于Litho使用Yoga,捏可以添加flexbox属性来设置Column或Row的子项的布局.在此处,你只需简单设置padding(填充大小)和背景颜色.
+你应该已经认出了之前教程中使用过的Text Component.在这个例子中,你要将其作为一个子属性添加至一个[Column](http://fblitho.com/javadoc/com/facebook/litho/Column)中.你可以把Column等同于HTML中的<div>标签.它是一个包装器,用于把组件整合在一起,并且可能会添加一些背景样式.由于Litho使用[Yoga](https://facebook.github.io/yoga/),你可以添加flexbox属性来设置Column或Row的子项的布局.在此处,你只需简单设置padding(填充大小)和背景颜色.
 
 你如何渲染这个Component呢?在你的activity中,简单的修改Component定义为:
 
@@ -115,14 +126,18 @@ final Component text = ListItem.create(context).build();
 
 这个ListItem是哪里来的呢?create方法和build方法是在哪里定义的呢?这是Litho Specs的魔力所在.
 
-在入门指南中,我们学习了如何添加依赖至项目中,来使代码生成器能够工作.这会在你的代码上运行一个注释处理器.它会自动查找FooSpec的类名,并且自动生成根据Spec类在同一个包下生成Foo类.Litho将会为这些类自动添加所需的所有方法.此外,根据规则,注释处理器还将生成的额外方法(例如Text的textSizeSp方法或者Column/Row的backgroundColor方法).
+在[准备工作](https://shikieiki.github.io/2017/04/27/Facebook%E5%87%BA%E5%93%81%E7%9A%84Android%E5%A3%B0%E6%98%8E%E5%BC%8F%E5%BC%80%E6%BA%90%E6%96%B0%E6%A1%86%E6%9E%B6Litho%E6%96%87%E6%A1%A3%E7%BF%BB%E8%AF%91-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C/)中,我们学习了如何添加依赖至项目中,来使代码生成器能够工作.这会在你的代码上运行一个注释处理器.它会自动查找FooSpec的类名,并且自动生成根据Spec类在同一个包下生成Foo类.Litho将会为这些类自动添加所需的所有方法.此外,根据规则,注释处理器还将生成的额外方法(例如Text的textSizeSp方法或者Column/Row的backgroundColor方法).
 
 就这么简单。运行你的app,你应该看到如下的画面:
 
 ![](/image/20170428102947.png)
 
-##### 3.创建一个列表
-你可以使用Litho的核心组件Recycler Component来处理列表相关的工作.这个component在概念上类似于Android的RecyclerView,然而,使用Litho,所有的布局计算都是在一个子线程中处理的,这带来了显著的性能提升.在教程的本部分中,你将使用一个RecyclerBinder来为Recycler提供Component,方式与使用LayoutManager与Adapter配合向RecyclerView提供View的方式相同.
+</p>
+</p>
+
+#### 3.创建一个列表
+---
+你可以使用Litho的核心组件[Recycler](http://fblitho.com/javadoc/com/facebook/litho/widget/Recycler) Component来处理列表相关的工作.这个component在概念上类似于Android的RecyclerView,然而,使用Litho,所有的布局计算都是在一个子线程中处理的,这带来了显著的性能提升.在教程的本部分中,你将使用一个[RecyclerBinder](http://fblitho.com/javadoc/com/facebook/litho/widget/RecyclerBinder)来为Recycler提供Component,方式与使用LayoutManager与Adapter配合向RecyclerView提供View的方式相同.
 首先,在你的activity中,像下面这样定义Component:
 ``` java
 final RecyclerBinder recyclerBinder = new RecyclerBinder(
@@ -150,7 +165,7 @@ private static void addContent(RecyclerBinder recyclerBinder, ComponentContext c
 }    
 ```
 
-在代码中,我们需要创建一个ComponentInfo来描述Recycler需要展示的component.在本例中,我们需要展示ListItem.
+在代码中,我们需要创建一个[ComponentInfo](http://fblitho.com/javadoc/com/facebook/litho/ComponentInfo)来描述Recycler需要展示的component.在本例中,我们需要展示ListItem.
 
 最后,在组件定义工作完成后,在activity的onCreate回调中调用addContent方法.
 ``` java
@@ -160,7 +175,11 @@ addContent(recyclerBinder, context);
 
 ![](/image/20170428105417.png)
 
-##### 4.定义Component的属性
+</p>
+</p>
+
+#### 4.定义Component的属性
+---
 列表如果只是简单的包含同一个component的拷贝就没有意义了.在这个部分,你需要把目光集中到属性,或者说props上.你可以设置很多的属性到Component上来改变它的外观和行为.
 
 为一个component添加props非常的简单.props是componentSpec的方法的参数,使用@Prop定义.
@@ -222,6 +241,16 @@ private void addContent(
 
 它告诉注释处理器构造一些函数，如shadowRadiusPx，shadowRadiusDip，shadowRadiusSp以及shadowRadiusRes。
 
-恭喜完成本教程！这个基础教程向你介绍了开始使用Litho所需要的所有基础构建块,并且教你构建了自己的Component。你可以在com.facebook.litho.widgets包中找到可以使用的预定义好的组件Component。你可以在[这里]()找到完整的教程。请务必查看[此示例]()和Litho API文档以获取更深入的代码。
+恭喜完成本教程！这个基础教程向你介绍了开始使用Litho所需要的所有基础构建块,并且教你构建了自己的Component。你可以在[com.facebook.litho.widgets](http://fblitho.com/javadoc/com/facebook/litho/widget/package-frame)包中找到可以使用的预定义好的组件Component。你可以在[这里](https://github.com/facebook/litho/tree/master/sample-barebones)找到完整的教程。请务必查看[此示例](https://github.com/facebook/litho/tree/master/sample)和Litho API文档以获取更深入的代码。
+
+</p>
+</p>
+</p>
+</p>
 
 [回到导航页](https://shikieiki.github.io/2017/05/04/Facebook%E5%87%BA%E5%93%81%E7%9A%84Android%E5%A3%B0%E6%98%8E%E5%BC%8F%E5%BC%80%E6%BA%90%E6%96%B0%E6%A1%86%E6%9E%B6Litho%E6%96%87%E6%A1%A3%E7%BF%BB%E8%AF%91-%E6%80%BB%E8%A7%88%E5%92%8C%E5%AF%BC%E8%88%AA/)
+
+</p>
+</p>
+</p>
+</p>

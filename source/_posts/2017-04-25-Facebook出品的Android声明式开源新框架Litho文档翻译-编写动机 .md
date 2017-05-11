@@ -6,10 +6,13 @@ category: Android知识
 ---
 
 欢迎转载,转载请标明出处.
-
-# 介绍Litho
-
+英文原文文档地址: [Litho-doc](http://fblitho.com/docs/motivation)
+## 介绍Litho
 ### 编写动机
+
+</p>
+</p>
+
 在Android上构建一个列表式界面相当的简单，虽然大多数app要更加复杂一点，但是大体上你只需要编写一个列表中Item的layout，然后再将其挂载到RecytclerView的adapter上去就完成了。
 
 当你的adapter拥有许多类型的view的时候，你就不得不去考虑一种更健壮的方法来回收view。如果你有很多很多种类型的view时，每次一个新的类型的view被显示的时候，RecyclerView都会不断的inflate新的view，这很可能导致滚动时帧数的下降。
@@ -22,4 +25,14 @@ category: Android知识
 
 Litho主要工作就是把优化RecyclerView的复杂工作打包起来.在使用Litho时,没有view类型的区别,你可以在后台线程中提前、无缝的构建你的UI,并且自动地把他们渲染成更加扁平化的层级结构。这些梦幻的特性，你都可以免费的通过一套非常简单的编程模式来获得。
 
+</p>
+</p>
+</p>
+</p>
+
 [回到导航页](https://shikieiki.github.io/2017/05/04/Facebook%E5%87%BA%E5%93%81%E7%9A%84Android%E5%A3%B0%E6%98%8E%E5%BC%8F%E5%BC%80%E6%BA%90%E6%96%B0%E6%A1%86%E6%9E%B6Litho%E6%96%87%E6%A1%A3%E7%BF%BB%E8%AF%91-%E6%80%BB%E8%A7%88%E5%92%8C%E5%AF%BC%E8%88%AA/)
+
+</p>
+</p>
+</p>
+</p>
